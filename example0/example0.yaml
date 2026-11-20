@@ -1,0 +1,20 @@
+# example0: one text-to-video clip with AnimateDiff on Apple Silicon (MPS).
+#
+# Realistic Vision v5.1 (style) + v3 motion module (motion), 16 frames at 512x512.
+# Paths are relative to this folder (run.sh runs from here) and point at the
+# checkpoints that ../get_models.sh downloaded into ../models/.
+- dreambooth_path: "../models/DreamBooth_LoRA/realisticVisionV60B1_v51VAE.safetensors"
+  lora_model_path: ""
+
+  inference_config: "../AnimateDiff/configs/inference/inference-v3.yaml"
+  motion_module: "../models/Motion_Module/v3_sd15_mm.ckpt"
+
+  seed: [20261120]
+  steps: 25
+  guidance_scale: 8
+
+  prompt:
+    - "photo of a red fox walking through a snowy pine forest, falling snow, golden hour, soft light, shallow depth of field, 8k uhd, dslr, high quality, film grain, Fujifilm XT3"
+
+  n_prompt:
+    - "semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime, text, watermark, cropped, out of frame, worst quality, low quality, jpeg artifacts, blurry, deformed, bad anatomy, extra limbs, extra legs, mutation"

@@ -1,0 +1,46 @@
+# Conda environment for AnimateDiff (https://github.com/guoyww/AnimateDiff)
+# Pins follow the upstream requirements.txt, adapted for macOS / Apple Silicon:
+#   - xformers is omitted (CUDA-only; the code checks is_xformers_available()).
+#   - decord is omitted (no macOS arm64 wheels; only used by animatediff/data/dataset.py for training).
+#   - huggingface_hub < 0.26 because diffusers 0.11.1 imports cached_download.
+#   - numpy < 2 for torch 2.3.1 compatibility.
+#   - gradio 3.36.1 (used by app.py) needs a mid-2023 web stack: gradio_client 0.2.x,
+#     fastapi 0.99 / pydantic 1, httpx 0.24, and setuptools < 70 (for pkg_resources).
+#   - wandb 0.16.x because newer releases require pydantic 2 (wandb is only used by train.py).
+#
+#   conda env create -f environment.yml
+#   conda activate animatediff
+name: animatediff
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - setuptools<70
+  - ffmpeg
+  - git
+  - git-lfs
+  - pip:
+      - torch==2.3.1
+      - torchvision==0.18.1
+      - diffusers==0.11.1
+      - transformers==4.25.1
+      - huggingface_hub==0.25.2
+      - accelerate==0.21.0
+      - numpy<2
+      - imageio==2.27.0
+      - imageio-ffmpeg==0.4.9
+      - omegaconf==2.3.0
+      - gradio==3.36.1
+      - gradio_client==0.2.10
+      - fastapi==0.99.1
+      - pydantic<2
+      - httpx==0.24.1
+      - websockets<12
+      - altair<5
+      - matplotlib<3.9
+      - pillow<11
+      - safetensors
+      - einops
+      - wandb==0.16.6
+      - protobuf<5
